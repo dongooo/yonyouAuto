@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="yyauto-web:war">
+    <output-path>$PROJECT_DIR$/yyauto-web/target</output-path>
+    <root id="archive" name="yyauto-web.war">
+      <element id="artifact" artifact-name="yyauto-web:war exploded" />
+    </root>
+  </artifact>
+</component>
