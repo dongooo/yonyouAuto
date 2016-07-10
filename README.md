@@ -14,6 +14,8 @@ mybatis3.2.3
 angularjs 1.x
 bootstrap 3.x
 jquery 2.x
+#移动前端
+vue小清新
 #前端自动化
 gulp
 bower
