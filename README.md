@@ -6,6 +6,7 @@ maven3.3.9
 tomcat8 
 mysql 5.6
 Intellij IDEA-2016.1 
+Photoshop cc 2014
 #后端框架
 spring4.2  
 mybatis3.2.3 
