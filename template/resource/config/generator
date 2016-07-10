@@ -1,5 +1,0 @@
-jdbc.driverLocation=.m2/repository/mysql-connector-java.5.1.30.jar
-jdbc.driverClass=com.mysql.jdbc.Driver
-jdbc.connectionURL=jdbc:mysql://localhost:3306/db_yyauto?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull
-jdbc.userId=root
-jdbc.password=root
