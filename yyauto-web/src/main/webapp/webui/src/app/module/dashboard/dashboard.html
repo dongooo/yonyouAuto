@@ -1,0 +1,112 @@
+<div class="container">
+
+  <div>
+    <acme-navbar creation-date="main.creationDate"></acme-navbar>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <!--左边树形菜单-->
+
+        <ul id="treeDemo" class="ztree"></ul>
+
+
+
+        <!--end-->
+      </div>
+    </div>
+
+
+    <div class="col-sm-6 col-md-8">
+      <div class="thumbnail">
+        <!--右边查询列表-->
+
+
+
+
+
+        <!--end-->
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    var setting = {	};
+
+    var zNodes =[
+      { name:"父节点1 - 展开", open:true,
+        children: [
+          { name:"父节点11 - 折叠",
+            children: [
+              { name:"叶子节点111"},
+              { name:"叶子节点112"},
+              { name:"叶子节点113"},
+              { name:"叶子节点114"}
+            ]},
+          { name:"父节点12 - 折叠",
+            children: [
+              { name:"叶子节点121"},
+              { name:"叶子节点122"},
+              { name:"叶子节点123"},
+              { name:"叶子节点124"}
+            ]},
+          { name:"父节点13 - 没有子节点", isParent:true}
+        ]},
+      { name:"父节点2 - 折叠",
+        children: [
+          { name:"父节点21 - 展开", open:true,
+            children: [
+              { name:"叶子节点211"},
+              { name:"叶子节点212"},
+              { name:"叶子节点213"},
+              { name:"叶子节点214"}
+            ]},
+          { name:"父节点22 - 折叠",
+            children: [
+              { name:"叶子节点221"},
+              { name:"叶子节点222"},
+              { name:"叶子节点223"},
+              { name:"叶子节点224"}
+            ]},
+          { name:"父节点23 - 折叠",
+            children: [
+              { name:"叶子节点231"},
+              { name:"叶子节点232"},
+              { name:"叶子节点233"},
+              { name:"叶子节点234"}
+            ]}
+        ]},
+      { name:"父节点3 - 没有子节点", isParent:true}
+
+    ];
+    $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+
+    function showAdpaterDetail(_params){
+      console.log("detail===",_params);
+    }
+    var dataSet = [{"id":"1","brand":"博世","name":"火花塞LP0020","code":"012 2899 102"},{"id":"2","brand":"博世","name":"火花塞LP0020","code":"012 2899 569"},{"id":"3","brand":" 用友","name":"火花塞LP0020","code":"012 2899 676"}];
+    function drawTable(_target,_dataSet){
+      if(_dataSet&&_dataSet.length>0){
+        var _html = "";
+        for (var i = _dataSet.length - 1; i >= 0; i--) {
+          _html += '<tr>';
+          _html +='<td>'+_dataSet[i]['id']+'</td>';
+          _html +='<td>'+_dataSet[i]['brand']+'</td>';
+          _html +='<td>'+_dataSet[i]['name']+'</td>';
+          _html +='<td>'+_dataSet[i]['code']+'</td>';
+          _html +='<td><a class="btn btn-default btn-xs" href="javascript:'+showAdpaterDetail(1)+'">明细</a></td>';
+          _html +='</tr>';
+        }
+        $(_target).append(_html);
+
+      }
+
+    }
+
+
+  });
+</script>
