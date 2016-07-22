@@ -1,6 +1,6 @@
 package com.yyauto.model;
 
-public class authentication {
+public class Authentication {
     private Integer id;
 
     private String uid;

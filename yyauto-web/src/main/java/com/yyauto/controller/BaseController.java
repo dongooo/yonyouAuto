@@ -5,6 +5,7 @@ import com.yyauto.service.ICarBrandService;
 import com.yyauto.service.ICarModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,12 +25,12 @@ public class BaseController {
 
     @Resource
     private ICarModelService iCarModelService;
-    @RequestMapping(value = "/carModel",method = RequestMethod.GET)
+    @RequestMapping(value = "/car/model/{id}",method = RequestMethod.GET)
     @ResponseBody
-    public Map<String, Object> test(HttpServletRequest req) throws Exception{
+    public Map<String, Object> test(@PathVariable int id,HttpServletRequest req) throws Exception{
         Map<String,Object> map = new HashMap<String, Object>();
 
-        map.put("list",iCarModelService.getCarModelByPrimaryKey(Integer.parseInt(req.getParameter("id"))));
+        map.put("list",iCarModelService.getCarModelByPrimaryKey(id));
         map.put("name","王晓二");
         map.put("age","255");
         return map;

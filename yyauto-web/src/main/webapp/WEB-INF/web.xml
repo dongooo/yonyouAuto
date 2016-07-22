@@ -25,6 +25,21 @@
     <!--默认匹配所有请求-->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+
+  <!--允许跨域请求-->
+  <filter>
+    <filter-name>httpCORS</filter-name>
+    <filter-class>com.yyauto.filter.httpCORSFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>httpCORS</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!--允许跨域请求end-->
+
+
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

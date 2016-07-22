@@ -1,17 +1,17 @@
 package com.yyauto.dao;
 
-import com.yyauto.model.authentication;
+import com.yyauto.model.Authentication;
 
-public interface authenticationMapper {
+public interface AuthenticationMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(authentication record);
+    int insert(Authentication record);
 
-    int insertSelective(authentication record);
+    int insertSelective(Authentication record);
 
-    authentication selectByPrimaryKey(Integer id);
+    Authentication selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(authentication record);
+    int updateByPrimaryKeySelective(Authentication record);
 
-    int updateByPrimaryKey(authentication record);
+    int updateByPrimaryKey(Authentication record);
 }

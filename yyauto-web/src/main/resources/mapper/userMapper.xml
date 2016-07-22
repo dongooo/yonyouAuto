@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yyauto.dao.userMapper">
-  <resultMap id="BaseResultMap" type="com.yyauto.model.user">
+<mapper namespace="com.yyauto.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.yyauto.model.User">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
@@ -35,7 +35,7 @@
     delete from sys_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.yyauto.model.user">
+  <insert id="insert" parameterType="com.yyauto.model.User">
     insert into sys_user (id, uid, user_name, 
       password, nick_name, sex, 
       birthday, mobile, phone, 
@@ -51,7 +51,7 @@
       #{deleted,jdbcType=BIT}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.yyauto.model.user">
+  <insert id="insertSelective" parameterType="com.yyauto.model.User">
     insert into sys_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -166,7 +166,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yyauto.model.user">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyauto.model.User">
     update sys_user
     <set>
       <if test="uid != null">
@@ -223,7 +223,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yyauto.model.user">
+  <update id="updateByPrimaryKey" parameterType="com.yyauto.model.User">
     update sys_user
     set uid = #{uid,jdbcType=VARCHAR},
       user_name = #{userName,jdbcType=VARCHAR},

@@ -50,17 +50,22 @@
             <columnOverride column="group_id" javaType="Long"/>
         </table>
 
-        <table tableName="sys_user" domainObjectName="user" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="pf_car_model" domainObjectName="CarModel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <columnOverride column="org_id" javaType="Long"/>
             <columnOverride column="group_id" javaType="Long"/>
         </table>
 
-        <table tableName="sys_authentication" domainObjectName="authentication" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sys_user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <columnOverride column="org_id" javaType="Long"/>
             <columnOverride column="group_id" javaType="Long"/>
         </table>
 
-        <table tableName="sys_login_log" domainObjectName="loginLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+        <table tableName="sys_authentication" domainObjectName="Authentication" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <columnOverride column="org_id" javaType="Long"/>
+            <columnOverride column="group_id" javaType="Long"/>
+        </table>
+
+        <table tableName="sys_login_log" domainObjectName="LoginLog" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <columnOverride column="org_id" javaType="Long"/>
             <columnOverride column="group_id" javaType="Long"/>
         </table>

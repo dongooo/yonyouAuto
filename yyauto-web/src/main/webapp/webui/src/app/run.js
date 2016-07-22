@@ -19,7 +19,9 @@
       'restangular',
       'ui.router',
       'mgcrea.ngStrap',
-      'toastr'])
+      'toastr',
+      'ngWebSocket'
+    ])
 
     .constant('malarkey', malarkey)
     .constant('moment', moment)

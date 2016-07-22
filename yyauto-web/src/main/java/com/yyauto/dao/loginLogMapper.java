@@ -1,17 +1,17 @@
 package com.yyauto.dao;
 
-import com.yyauto.model.loginLog;
+import com.yyauto.model.LoginLog;
 
-public interface loginLogMapper {
+public interface LoginLogMapper {
     int deleteByPrimaryKey(Integer id);
 
-    int insert(loginLog record);
+    int insert(LoginLog record);
 
-    int insertSelective(loginLog record);
+    int insertSelective(LoginLog record);
 
-    loginLog selectByPrimaryKey(Integer id);
+    LoginLog selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(loginLog record);
+    int updateByPrimaryKeySelective(LoginLog record);
 
-    int updateByPrimaryKey(loginLog record);
+    int updateByPrimaryKey(LoginLog record);
 }

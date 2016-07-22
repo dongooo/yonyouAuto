@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yyauto.dao.authenticationMapper">
-  <resultMap id="BaseResultMap" type="com.yyauto.model.authentication">
+<mapper namespace="com.yyauto.dao.AuthenticationMapper">
+  <resultMap id="BaseResultMap" type="com.yyauto.model.Authentication">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="uid" jdbcType="VARCHAR" property="uid" />
     <result column="access_token" jdbcType="VARCHAR" property="accessToken" />
@@ -22,7 +22,7 @@
     delete from sys_authentication
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.yyauto.model.authentication">
+  <insert id="insert" parameterType="com.yyauto.model.Authentication">
     insert into sys_authentication (id, uid, access_token, 
       refresh_token, expires_in, scope
       )
@@ -30,7 +30,7 @@
       #{refreshToken,jdbcType=VARCHAR}, #{expiresIn,jdbcType=INTEGER}, #{scope,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.yyauto.model.authentication">
+  <insert id="insertSelective" parameterType="com.yyauto.model.Authentication">
     insert into sys_authentication
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -73,7 +73,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.yyauto.model.authentication">
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyauto.model.Authentication">
     update sys_authentication
     <set>
       <if test="uid != null">
@@ -94,7 +94,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.yyauto.model.authentication">
+  <update id="updateByPrimaryKey" parameterType="com.yyauto.model.Authentication">
     update sys_authentication
     set uid = #{uid,jdbcType=VARCHAR},
       access_token = #{accessToken,jdbcType=VARCHAR},

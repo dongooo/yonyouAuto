@@ -2,7 +2,7 @@ package com.yyauto.model;
 
 import java.util.Date;
 
-public class user {
+public class User {
     private Integer id;
 
     private String uid;

@@ -2,7 +2,7 @@ package com.yyauto.model;
 
 import java.util.Date;
 
-public class loginLog {
+public class LoginLog {
     private Integer id;
 
     private String uid;
