@@ -19,7 +19,7 @@
           controllerAs: 'dashboard'
         });
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/user/404');
     })
     .factory('WSC',function ($websocket) {
       //open a websocket connection

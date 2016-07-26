@@ -1,0 +1,31 @@
+
+*{
+  padding: 0px;
+  margin: 0px;
+}
+
+#login-container{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(15, 167, 152, 0.6);
+ // background-image: url("/images/lbr.jpg");
+  .login-inner{
+    position: relative;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 515px;
+    height: 295px;
+    top:15%;
+    border: 1px solid #37abb8;
+    background-color: rgba(255,255,255,.4);
+    padding: 40px;
+    border-radius: 10px;
+    //background: grey;
+  }
+  .login-header{
+    width: 100%;
+    height: 60px;
+    //border-bottom: 5px solid #E74C3C;
+  }
+}

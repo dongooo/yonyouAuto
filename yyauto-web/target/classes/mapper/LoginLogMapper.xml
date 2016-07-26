@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yyauto.dao.LoginLogMapper">
+  <resultMap id="BaseResultMap" type="com.yyauto.model.LoginLog">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="enter_time" jdbcType="TIMESTAMP" property="enterTime" />
+    <result column="enter_ip" jdbcType="VARCHAR" property="enterIp" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="browser" jdbcType="VARCHAR" property="browser" />
+    <result column="screen_resolution" jdbcType="VARCHAR" property="screenResolution" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, uid, enter_time, enter_ip, status, browser, screen_resolution
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_login_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sys_login_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yyauto.model.LoginLog">
+    insert into sys_login_log (id, uid, enter_time, 
+      enter_ip, status, browser, 
+      screen_resolution)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{enterTime,jdbcType=TIMESTAMP}, 
+      #{enterIp,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{browser,jdbcType=VARCHAR}, 
+      #{screenResolution,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yyauto.model.LoginLog">
+    insert into sys_login_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="uid != null">
+        uid,
+      </if>
+      <if test="enterTime != null">
+        enter_time,
+      </if>
+      <if test="enterIp != null">
+        enter_ip,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="browser != null">
+        browser,
+      </if>
+      <if test="screenResolution != null">
+        screen_resolution,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null">
+        #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterIp != null">
+        #{enterIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="screenResolution != null">
+        #{screenResolution,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yyauto.model.LoginLog">
+    update sys_login_log
+    <set>
+      <if test="uid != null">
+        uid = #{uid,jdbcType=VARCHAR},
+      </if>
+      <if test="enterTime != null">
+        enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enterIp != null">
+        enter_ip = #{enterIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="browser != null">
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="screenResolution != null">
+        screen_resolution = #{screenResolution,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yyauto.model.LoginLog">
+    update sys_login_log
+    set uid = #{uid,jdbcType=VARCHAR},
+      enter_time = #{enterTime,jdbcType=TIMESTAMP},
+      enter_ip = #{enterIp,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      browser = #{browser,jdbcType=VARCHAR},
+      screen_resolution = #{screenResolution,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
