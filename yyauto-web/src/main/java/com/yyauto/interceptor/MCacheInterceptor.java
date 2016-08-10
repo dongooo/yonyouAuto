@@ -33,35 +33,35 @@ public class MCacheInterceptor implements MethodInterceptor {
      */
     public MCacheInterceptor() {
         try {
-//            File f = new File("/Users/dongooo/Documents/yonyou2016/wk-yonyou-auto/yyauto-web/src/main/resources/cacheConf.properties");
-//            //配置文件位置直接被写死，有需要自己修改下
-//            InputStream in = new FileInputStream(f);
-////          InputStream in = getClass().getClassLoader().getResourceAsStream(
-////                  "D:\\lunaJee-workspace\\msm\\msm_core\\src\\main\\java\\com\\mucfc\\msm\\common\\cacheConf.properties");
-//            Properties p = new Properties();
-//            p.load(in);
-//            // 分割字符串
-//            String[] targetNames = p.getProperty("targetNames").split(",");
-//            String[] methodNames = p.getProperty("methodNames").split(",");
-//
-//            // 加载过期时间设置
-//            defaultCacheExpireTime = Long.valueOf(p.getProperty("defaultCacheExpireTime"));
-//            xxxRecordManagerTime = Long.valueOf(p.getProperty("com.service.impl.xxxRecordManager"));
-//            xxxSetRecordManagerTime = Long.valueOf(p.getProperty("com.service.impl.xxxSetRecordManager"));
-//            // 创建list
-//            targetNamesList = new ArrayList<String>(targetNames.length);
-//            methodNamesList = new ArrayList<String>(methodNames.length);
-//            Integer maxLen = targetNames.length > methodNames.length ? targetNames.length
-//                    : methodNames.length;
-//            // 将不需要缓存的类名和方法名添加到list中
-//            for (int i = 0; i < maxLen; i++) {
-//                if (i < targetNames.length) {
-//                    targetNamesList.add(targetNames[i]);
-//                }
-//                if (i < methodNames.length) {
-//                    methodNamesList.add(methodNames[i]);
-//                }
-//            }
+            File f = new File("/Users/dongooo/Documents/yonyou2016/wk-yonyou-auto/yyauto-web/src/main/resources/cacheConf.properties");
+            //配置文件位置直接被写死，有需要自己修改下
+            InputStream in = new FileInputStream(f);
+//          InputStream in = getClass().getClassLoader().getResourceAsStream(
+//                  "D:\\lunaJee-workspace\\msm\\msm_core\\src\\main\\java\\com\\mucfc\\msm\\common\\cacheConf.properties");
+            Properties p = new Properties();
+            p.load(in);
+            // 分割字符串
+            String[] targetNames = p.getProperty("targetNames").split(",");
+            String[] methodNames = p.getProperty("methodNames").split(",");
+
+            // 加载过期时间设置
+            defaultCacheExpireTime = Long.valueOf(p.getProperty("defaultCacheExpireTime"));
+            xxxRecordManagerTime = Long.valueOf(p.getProperty("com.service.impl.xxxRecordManager"));
+            xxxSetRecordManagerTime = Long.valueOf(p.getProperty("com.service.impl.xxxSetRecordManager"));
+            // 创建list
+            targetNamesList = new ArrayList<String>(targetNames.length);
+            methodNamesList = new ArrayList<String>(methodNames.length);
+            Integer maxLen = targetNames.length > methodNames.length ? targetNames.length
+                    : methodNames.length;
+            // 将不需要缓存的类名和方法名添加到list中
+            for (int i = 0; i < maxLen; i++) {
+                if (i < targetNames.length) {
+                    targetNamesList.add(targetNames[i]);
+                }
+                if (i < methodNames.length) {
+                    methodNamesList.add(methodNames[i]);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
