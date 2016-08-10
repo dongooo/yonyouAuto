@@ -16,7 +16,9 @@
 
 
     <!--扫描service包(包含子包)下所有使用注解的类型-->
-    <context:component-scan base-package="com.yyauto.service"></context:component-scan>
+    <context:component-scan base-package="com.yyauto">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 
     <!--配置事务管理器(mybatis采用的是JDBC的事务管理器)-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -25,5 +27,18 @@
 
     <!--配置基于注解的声明式事务,默认使用注解来管理事务行为-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!-- 需要加入缓存的类或方法 -->
+    <bean id="methodCachePointCut" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" >
+        <property name="advice" >
+            <ref bean="methodCacheInterceptor" />
+        </property>
+        <property name="patterns" >
+            <list>
+                <!-- 确定正则表达式列表 -->
+                <value>com\.yyauto\.service\.impl\*.*</value>
+            </list>
+        </property>
+    </bean >
 
 </beans>

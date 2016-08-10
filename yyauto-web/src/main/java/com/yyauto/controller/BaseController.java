@@ -29,7 +29,6 @@ public class BaseController {
     @ResponseBody
     public Map<String, Object> test(@PathVariable int id,HttpServletRequest req) throws Exception{
         Map<String,Object> map = new HashMap<String, Object>();
-
         map.put("list",iCarModelService.getCarModelByPrimaryKey(id));
         map.put("name","王晓二");
         map.put("age","255");
@@ -51,6 +50,5 @@ public class BaseController {
         map.put("message","ahaha");
         return map;
     }
-
 
 }

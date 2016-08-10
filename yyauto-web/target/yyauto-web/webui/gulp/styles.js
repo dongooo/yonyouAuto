@@ -27,13 +27,14 @@ var buildStyles = function() {
   };
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/app/theme/*.scss'),
+    path.join(conf.paths.src, '/app/theme/*.css'),
+    path.join(conf.paths.src, '/{app,components,module}/**/*.scss'),
     path.join('!' + conf.paths.src, '/app/theme/style.scss')
-  ], { read: false });
+  ], { read: true });
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(conf.paths.src + '/app/', '');
+      filePath = filePath.replace(conf.paths.src + '/{app,components,module}/**/', '');
       return '@import "' + filePath + '";';
     },
     starttag: '// injector',

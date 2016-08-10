@@ -19,11 +19,11 @@
           controllerAs: 'dashboard'
         });
 
-      $urlRouterProvider.otherwise('/');
+      $urlRouterProvider.otherwise('/user/404');
     })
     .factory('WSC',function ($websocket) {
       //open a websocket connection
-      var ws = $websocket("ws://"+document.location.host+document.location.pathname+"linking");
+      var ws = $websocket("ws://localhost:8081/yyauto-web/linking");
       var wsc = [];
       ws.onMessage(function (event) {
         console.log('message: ',event.data);

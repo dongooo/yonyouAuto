@@ -11,13 +11,14 @@
   angular
     .module('webui', [
       'ngAnimate',
-      'ngCookies',
+      'ipCookie',
       'ngTouch',
       'ngSanitize',
       'ngMessages',
       'ngAria',
       'restangular',
       'ui.router',
+      'ng-token-auth',
       'mgcrea.ngStrap',
       'toastr',
       'ngWebSocket'
