@@ -36,7 +36,7 @@ CREATE TABLE sys_authentication(
   uid VARCHAR(40) DEFAULT '' NOT NULL COMMENT '关联用户信息表标示,用户唯一标识',
   access_token VARCHAR(100) DEFAULT '' COLLATE utf8_unicode_ci COMMENT '用户登陆认证token',
   refresh_token VARCHAR(100) DEFAULT '' COLLATE utf8_unicode_ci COMMENT '用户登陆认证刷新token,access_token超时后,可以使用refresh_token进行刷新,refresh_token有效期为7天',
-  expires_in INT DEFAULT 3600  COMMENT '接口调用凭证超时时间,单位（秒）',
+  expires_in TIMESTAMP DEFAULT now() COMMENT '接口调用凭证超时时间,单位（秒）',
   scope VARCHAR(100) DEFAULT '' COLLATE utf8_unicode_ci COMMENT '用户授权作用域',
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

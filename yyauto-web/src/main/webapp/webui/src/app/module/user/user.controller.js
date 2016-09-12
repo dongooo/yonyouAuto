@@ -9,26 +9,71 @@
 
   'use strict';
   angular.module('webui')
-    .config(function ($stateProvider,$urlRouterProvider) {
-      $stateProvider
-        .state('login', {
-          url: '/user/login',
-          templateUrl: 'app/module/user/login.html',
-          controller: 'userController',
-          controllerAs: 'user'
+
+    .controller('userController',function ($scope,$log,$http,$auth) {
+
+      //-------login start-------
+      $auth.submitLogin($scope.loginForm)
+        .then(function(resp) {
+          // handle success response
         })
-        .state('404', {
-          url: '/user/404',
-          templateUrl: 'app/module/user/404.html',
-          controller: '404Controller',
-          controllerAs: '404'
+        .catch(function(resp) {
+          // handle error response
         });
 
-      $urlRouterProvider.otherwise('/user/404')
-    })
 
-    .controller('userController',function ($scope,$log) {
-        $log.debug('---user-controller--');
+      //-------login end---------
+
+      //
+      // $scope.doLogin = function(){
+      //   $http({
+      //     method: 'POST',
+      //     data: $scope.user,
+      //     url: 'http://localhost:8081/yyauto-web/api/auth/login'
+      //   }).then(function successCallback(response) {
+      //     // this callback will be called asynchronously
+      //     // when the response is available
+      //     $scope.tokens = response.data.content;
+      //     console.log($scope.tokens);
+      //   }, function errorCallback(response) {
+      //     // called asynchronously if an error occurs
+      //     // or server returns response with an error status.
+      //   });
+      // }
+      //
+      // $scope.doLogout = function () {
+      //   $http({
+      //     method: 'DELETE',
+      //     headers:{
+      //       Authorization:$scope.tokens||undefined
+      //     },
+      //     url: 'http://localhost:8081/yyauto-web/api/auth/logout'
+      //   }).then(function successCallback(response) {
+      //     // this callback will be called asynchronously
+      //     // when the response is available
+      //   }, function errorCallback(response) {
+      //     // called asynchronously if an error occurs
+      //     // or server returns response with an error status.
+      //   });
+      // }
+      //
+      // $scope.getUserInfo =function () {
+      //   $http({
+      //     method: 'GET',
+      //     headers:{
+      //       Authorization:$scope.tokens||undefined
+      //     },
+      //     url: 'http://localhost:8081/yyauto-web/api/auth/getUserName'
+      //   }).then(function successCallback(response) {
+      //     // this callback will be called asynchronously
+      //     // when the response is available
+      //   }, function errorCallback(response) {
+      //     // called asynchronously if an error occurs
+      //     // or server returns response with an error status.
+      //   });
+      // }
+
+
     })
 
     .controller('404Controller',function ($log) {

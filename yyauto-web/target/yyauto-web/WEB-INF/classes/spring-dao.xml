@@ -82,4 +82,20 @@
         <property name="basePackage" value="com.yyauto.dao"/>
     </bean>
 
+    <!--管理验证信息的bean-->
+    <bean id="tokenManager" class="com.scienjus.authorization.manager.impl.MySQLTokenManager">
+        <!--Token失效时间/秒-->
+        <property name="tokenExpireSeconds" value="3600" />
+        <!--数据源-->
+        <property name="dataSource" ref="dataSource" />
+        <!--存储验证信息的表名-->
+        <property name="tableName" value="sys_authentication" />
+        <!--存储Key的字段名-->
+        <property name="keyColumnName" value="uid" />
+        <!--存储Token的字段名-->
+        <property name="tokenColumnName" value="access_token" />
+        <!--存储Token过期时间的字段名-->
+        <property name="expireAtColumnName" value="expires_in" />
+    </bean>
+
 </beans>

@@ -1,10 +1,8 @@
 package com.yyauto.controller;
 
-import com.yyauto.model.CarModel;
 import com.yyauto.service.ICarBrandService;
 import com.yyauto.service.ICarModelService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +12,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 /**
  * Created by dongooo on 16/7/8.

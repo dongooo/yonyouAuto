@@ -161,6 +161,11 @@
       <version>3.1.0.CR2</version>
     </dependency>
     <dependency>
+      <groupId>org.jboss</groupId>
+      <artifactId>jandex</artifactId>
+      <version>1.1.0.Final</version>
+    </dependency>
+    <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
       <version>1.0.0.GA</version>
@@ -195,6 +200,13 @@
       <artifactId>javaee-api</artifactId>
       <version>7.0</version>
     </dependency>
+
+      <!--权限管理-->
+      <dependency>
+          <groupId>com.scienjus</groupId>
+          <artifactId>spring-authorization-manager</artifactId>
+          <version>1.0-SNAPSHOT</version>
+      </dependency>
 
 
     <!--redis相关-->
@@ -296,8 +308,13 @@
 
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-      <version>2.7.3</version>
+      <version>2.8.1</version>
     </dependency>
 
     <!-- 上传组件包 -->
@@ -311,6 +328,14 @@
       <artifactId>commons-io</artifactId>
       <version>2.4</version>
     </dependency>
+
+    <!--json web token-->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+      <version>0.6.0</version>
+    </dependency>
+
 
   </dependencies>
   <build>

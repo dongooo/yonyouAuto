@@ -19,11 +19,16 @@
       <param-name>contextConfigLocation</param-name>
       <param-value>classpath:spring-*.xml</param-value>
     </init-param>
+    <init-param>
+      <param-name>dispatchOptionsRequest</param-name>
+      <param-value>true</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>spring-mvc</servlet-name>
     <!--默认匹配所有请求-->
-    <url-pattern>/</url-pattern>
+    <url-pattern>/api/*</url-pattern>
   </servlet-mapping>
 
 
@@ -39,11 +44,5 @@
   </filter-mapping>
   <!--允许跨域请求end-->
 
-
-
-
-  <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
 
 </web-app>

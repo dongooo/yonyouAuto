@@ -10,17 +10,6 @@
 
   angular
     .module('webui')
-    .config(function ($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state('dashboard', {
-          url: '/',
-          templateUrl: 'app/module/dashboard/dashboard.html',
-          controller: 'dashboardController',
-          controllerAs: 'dashboard'
-        });
-
-      $urlRouterProvider.otherwise('/user/404');
-    })
     .factory('WSC',function ($websocket) {
       //open a websocket connection
       var ws = $websocket("ws://localhost:8081/yyauto-web/linking");

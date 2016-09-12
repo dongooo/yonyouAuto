@@ -29,7 +29,7 @@
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <!-- 激活自动代理功能 -->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
     <bean id="methodCachePointCut"  class="org.springframework.aop.support.RegexpMethodPointcutAdvisor" >
         <property name="advice" >

@@ -5,16 +5,18 @@
   </div>
 
   <div class="login-inner">
-    <form>
+    <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}">
       <div class="form-group">
         <label>用户名</label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" ng-model="loginForm.userName" required="required">
       </div>
       <div class="form-group">
         <label>密码</label>
-        <input type="password" class="form-control">
+        <input type="password" class="form-control" ng-model="loginForm.password" required="required">
       </div>
-      <button type="button" class="btn btn-default">登录</button>
+      <button type="submit" class="btn btn-default">登录</button>
+      <!--<button type="button" class="btn btn-danger" ng-click="doLogout()">退出</button>-->
+      <!--<button type="button" class="btn btn-info" ng-click="getUserInfo()">获取用户信息</button>-->
     </form>
   </div>
 </div>

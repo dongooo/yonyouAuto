@@ -17,7 +17,24 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
     ①自动注册DefaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter
     ②提供一系列:数据绑定,数字和日期的format,@NumberFormat,@DataTimeFormat,xml,json默认读写支持
     -->
-    <mvc:annotation-driven/>
+    <!--<mvc:annotation-driven/>-->
+
+
+    <mvc:annotation-driven>
+        <mvc:argument-resolvers>
+            <!--配置注入登录用户的解析器-->
+            <bean id="currentUserMethodArgumentResolver" class="com.scienjus.authorization.resolvers.CurrentUserMethodArgumentResolver">
+                <!--需要解析的用户类-->
+                <property name="userModelClass" value="com.yyauto.model.User" />
+                <!--查询用户的bean-->
+                <property name="userModelRepository" ref="userRepository" />
+            </bean>
+        </mvc:argument-resolvers>
+    </mvc:annotation-driven>
+
+    <!--通过Key获得对应用户的bean-->
+    <bean id="userRepository" class="com.yyauto.model.UserRepository" />
+
 
     <!--2:静态资源默认servlet配置
     ①加入对静态资源的处理:js,css,gif,png
@@ -26,12 +43,31 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
     <mvc:default-servlet-handler/>
 
     <!--3:配置JSP显示ViewResolver-->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/jsp/"/>
-        <property name="suffix" value=".jsp"/>
-    </bean>
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
+        <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
+        <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
 
+    <!--权限拦截-->
+    <mvc:interceptors>
+        <!--身份验证的拦截器-->
+        <mvc:interceptor>
+         <!-- 匹配的是url路径， 如果不配置或/**,将拦截所有的Controller -->
+            <mvc:mapping path="/**" />
+            <!--<mvc:exclude-mapping path="/tokens/login"/>-->
+            <bean id="authorizationInterceptor" class="com.scienjus.authorization.interceptor.AuthorizationInterceptor">
+                <!--验证信息存储的Http头-->
+                <property name="httpHeaderName" value="Authorization" />
+                <!--验证信息通用前缀，例如Bearer-->
+                <property name="httpHeaderPrefix" value="Bearer" />
+                <!--验证失败时的错误信息-->
+                <property name="unauthorizedErrorMessage" value="Token failure,please sign in again!" />
+                <!--管理验证信息的bean-->
+                <property name="manager" ref="tokenManager" />
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--4:扫描web相关的bean-->
     <context:component-scan base-package="com.yyauto"/>
