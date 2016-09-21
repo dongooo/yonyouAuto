@@ -28,7 +28,7 @@ public class httpCORSFilter extends OncePerRequestFilter {
         //if(request.getHeader("Access-Control-Request-Method") != null && "OPTIONS".equals(request.getMethod())){
             LOG.trace("Sending Header....");
             response.addHeader("Access-Control-Allow-Methods","GET,POST,PUT,DELETE,OPTIONS");
-            response.addHeader("Access-Control-Allow-Headers","If-Modified-Since,Content-Type,Authorization");
+            response.addHeader("Access-Control-Allow-Headers","If-Modified-Since,Content-Type,signedIn,access-token,expiry,client-id,uid");
             response.addHeader("Access-Control-Max-Age","3600");
         //}
         filterChain.doFilter(request,response);

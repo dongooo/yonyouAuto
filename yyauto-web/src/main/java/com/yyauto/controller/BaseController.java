@@ -1,5 +1,6 @@
 package com.yyauto.controller;
 
+import com.scienjus.authorization.annotation.Authorization;
 import com.yyauto.service.ICarBrandService;
 import com.yyauto.service.ICarModelService;
 import org.springframework.stereotype.Controller;
@@ -36,15 +37,15 @@ public class BaseController {
     @Resource
     private ICarBrandService iCarBrandService;
 
-    @RequestMapping(value = "carBrand",method = RequestMethod.GET)
-    @ResponseBody
-    public Map<String,Object> getCarBrandById(HttpServletRequest req) throws Exception{
+    @RequestMapping(value = "carBrand/{id}",method = RequestMethod.GET)
+    @Authorization
+    public @ResponseBody Map<String,Object> getCarBrandById(@PathVariable int id) throws Exception{
         Map<String,Object> map = new HashMap<String, Object>();
 
-        map.put("list",iCarBrandService.getCarBrandByPrimaryKey(Integer.parseInt(req.getParameter("id"))));
+        map.put("list",iCarBrandService.getCarBrandByPrimaryKey(id));
 
         map.put("success",true);
-        map.put("message","ahaha");
+        map.put("message","OK");
         return map;
     }
 

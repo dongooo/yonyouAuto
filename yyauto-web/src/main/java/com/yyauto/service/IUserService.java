@@ -1,5 +1,7 @@
 package com.yyauto.service;
 
+import com.yyauto.model.User;
+
 /**
  * description: 用户接口
  * author: dongooo
@@ -9,5 +11,6 @@ package com.yyauto.service;
 
 public interface IUserService {
 
+    public User findByUserName(String userName) throws Exception;
 
 }

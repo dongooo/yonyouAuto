@@ -10,14 +10,80 @@
   angular.module('webui').config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig,RestangularProvider,$stateProvider,$httpProvider,$authProvider) {
+  function config($logProvider, toastrConfig,RestangularProvider,$stateProvider,$httpProvider,$injector,$authProvider,$urlRouterProvider) {
+
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+      var extractedData;
+      if (operation === "getList") {
+        extractedData = data.body;
+        extractedData.error = data.error;
+        extractedData.paging = data.paging;
+      } else {
+        extractedData = data.data;
+      }
+      return extractedData;
+    });
+
+    //拦截数据
+    $httpProvider.interceptors.push([
+      '$injector', function($injector) {
+        return {
+          request: function(req) {
+            $injector.invoke([
+              '$http', '$auth','jwtHelper','$state', function($http, $auth,jwtHelper,$state) {
+                var token,isExpiry=!1,isHasToken;
+                token = $auth.retrieveData('access_token');
+                isHasToken = (token == ''||token == void 0||token == null)?false:true;
+                if(isHasToken){
+                  isExpiry = jwtHelper.isTokenExpired(token);
+                }
+
+                if (req.url.match($auth.apiUrl())) {
+                  if(isHasToken&&!isExpiry){
+                    return req.headers['access-token'] = token;
+                  }else{
+                    $state.go('login');
+                  }
+
+
+                }
+              }
+            ]);
+            return req;
+          },
+          response: function(resp) {
+            $injector.invoke([
+              '$http', '$auth', function($http, $auth) {
+                if (resp.config.url.match($auth.apiUrl())) {
+                  return resp;
+                }
+              }
+            ]);
+            return resp;
+          },
+          responseError: function(resp) {
+            $injector.invoke([
+              '$http', '$auth','$state', function($http, $auth,$state) {
+                if (resp.config.url.match($auth.apiUrl())) {
+                  if(resp.status ==401&&resp.data==401){
+                    $state.go('login');
+                  }else{
+                    return resp;
+                  }
+                }
+              }
+            ]);
+            return $injector.get('$q').reject(resp);
+          }
+        };
+      }
+    ]);
+
+
+
     // Enable log
     $logProvider.debugEnabled(true);
-    // $httpProvider.defaults.useXDomain = true;
-    // delete $httpProvider.defaults.headers.common['X-Requested-With'];
-    // $httpProvider.defaults.headers.common["Accept"] = "application/json";
-    // $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-    // Set options third-party lib
+
     toastrConfig.allowHtml = true;
     toastrConfig.timeOut = 3000;
     toastrConfig.positionClass = 'toast-top-right';
@@ -27,20 +93,23 @@
     //set restangular
     RestangularProvider.setBaseUrl("http://localhost:8081/yyauto-web/api/");
 
-    //权限控制
+    //登录认证
     $authProvider.configure({
       apiUrl:                  'http://localhost:8081/yyauto-web/api',
-      //tokenValidationPath:     '/auth/tokenValidate',
+      tokenValidationPath:     '/auth/tokenValidate',
       signOutUrl:              '/auth/logout',
       emailSignInPath:         '/auth/login',
       storage:                 'cookies',
       //forceValidateToken:      false,
-      //validateOnPageLoad:      true,
+      validateOnPageLoad:      true,
       proxyIf:                 function() { return false; },
       proxyUrl:                '/proxy',
       omniauthWindowType:      'sameWindow',
       tokenFormat: {
-        "Authorization": "token={{ token }}"
+        "access-token": "{{ token }}",
+        "client":       "{{ clientId }}",
+        "expiry":       "{{ expiry }}",
+        "uid":          "{{ uid }}"
       },
       cookieOps: {
         path: "/",
@@ -67,7 +136,6 @@
     });
 
     $stateProvider
-    // this state will be visible to everyone
       .state('login', {
         url: '/',
         templateUrl: 'app/module/user/login.html',
@@ -75,26 +143,56 @@
         controllerAs: 'user'
       })
 
-      // only authenticated users will be able to see routes that are
-      // children of this state
       .state('admin', {
         url: '/admin',
         abstract: true,
-        template: '<ui-view/>',
+        template: '<div ui-view></div>',
         resolve: {
-          auth: function($auth) {
-            return $auth.validateUser();
+          auth: function($auth,jwtHelper,$state,$location,$timeout) {
+             var token,isExpiry=!0,isHasToken,currentUrl;
+             token = $auth.retrieveData('access_token');
+             isHasToken = (token == ''||token == void 0||token == null)?false:true;
+             //currentUrl = $location.$$url;
+            if(isHasToken){
+              isExpiry = jwtHelper.isTokenExpired(token);
+            }
+            if(!isHasToken&&isExpiry){
+              $timeout(function () {
+                $state.go('login');
+              },0)
+            }
+            //todo
+            //若登录,处理当前路由
+            //else{
+              //$location.path(currentUrl);
+             // $rootScope.$apply();
+            //}
+            $auth.resolveDfd();
           }
         }
       })
 
       // this route will only be available to authenticated users
       .state('dashboard', {
+        parent:'admin',
         url: '/dashboard',
         templateUrl: 'app/module/dashboard/dashboard.html',
-        controller: 'dashboardController',
-        controllerAs: 'dashboard'
-      });
+        controller: 'dashboardController'
+      })
+      .state('404', {
+        parent:'admin',
+        url: '/404',
+        templateUrl: 'app/module/user/404.html'
+      })
+    ;
+
+    $urlRouterProvider.otherwise(function($injector, $location){
+      $injector.invoke(['$state', function($state) {
+        $state.go('404');
+      }]);
+    });
+
+
 
   }
 

@@ -10,6 +10,9 @@
 
   angular
     .module('webui')
+    .factory('CarBrand',function (Restangular) {
+      return Restangular.service('base/carBrand');
+    })
     .factory('WSC',function ($websocket) {
       //open a websocket connection
       var ws = $websocket("ws://localhost:8081/yyauto-web/linking");
@@ -66,8 +69,7 @@
     .controller('dashboardController', dashboardCtrl);
 
   /** @ngInject */
-  function dashboardCtrl($scope,$timeout,toastr,$http,WSC) {
-      console.log('----dashboard----');
+  function dashboardCtrl($scope,$timeout,toastr,$http,WSC,CarBrand) {
 
     $scope.WSC = WSC;
 
@@ -75,18 +77,11 @@
       WSC.send("WSC SERVER");
     };
 
+     CarBrand.one(368).get().then(function(data){
+       console.log('CarBrand----',data);
+     })
 
-    $http({
-      method: 'GET',
-      url: 'http://localhost:8081/yyauto-web/base/carBrand?id=368'
-    }).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-    });
-    //todo
+
 
   }
 

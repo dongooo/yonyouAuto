@@ -21,14 +21,15 @@
       'ng-token-auth',
       'mgcrea.ngStrap',
       'toastr',
-      'ngWebSocket'
+      'ngWebSocket',
+      'angular-jwt'
     ])
 
     .constant('malarkey', malarkey)
     .constant('moment', moment)
 
-    .run(function ($log) {
-      $log.debug('runBlock end');
+    .run(function ($log,$rootScope,Restangular) {
+     // $log.debug('runBlock end');
     });
 
 })();

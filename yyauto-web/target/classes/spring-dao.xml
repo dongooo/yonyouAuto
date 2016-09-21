@@ -84,8 +84,8 @@
 
     <!--管理验证信息的bean-->
     <bean id="tokenManager" class="com.scienjus.authorization.manager.impl.MySQLTokenManager">
-        <!--Token失效时间/秒-->
-        <property name="tokenExpireSeconds" value="3600" />
+        <!--Token失效时间/秒,默认7天有效期-->
+        <property name="tokenExpireSeconds" value="604800" />
         <!--数据源-->
         <property name="dataSource" ref="dataSource" />
         <!--存储验证信息的表名-->

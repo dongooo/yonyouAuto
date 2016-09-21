@@ -1,5 +1,8 @@
 package com.yyauto.common;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * description: 工具类
  * author: dongooo
@@ -7,7 +10,13 @@ package com.yyauto.common;
  * php: https://github.com/dongooo
  **/
 
-public class Util {
+public final class Util {
 
+    public static Date getExpiryDate(int minutes){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.MINUTE,minutes);
+        return  calendar.getTime();
+    }
 
 }

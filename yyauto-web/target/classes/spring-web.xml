@@ -58,11 +58,11 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
             <!--<mvc:exclude-mapping path="/tokens/login"/>-->
             <bean id="authorizationInterceptor" class="com.scienjus.authorization.interceptor.AuthorizationInterceptor">
                 <!--验证信息存储的Http头-->
-                <property name="httpHeaderName" value="Authorization" />
+                <property name="httpHeaderName" value="access-token" />
                 <!--验证信息通用前缀，例如Bearer-->
-                <property name="httpHeaderPrefix" value="Bearer" />
+                <property name="httpHeaderPrefix" value="" />
                 <!--验证失败时的错误信息-->
-                <property name="unauthorizedErrorMessage" value="Token failure,please sign in again!" />
+                <property name="unauthorizedErrorMessage" value="401" />
                 <!--管理验证信息的bean-->
                 <property name="manager" ref="tokenManager" />
             </bean>
