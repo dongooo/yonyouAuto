@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var webserver = require('gulp-webserver');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -94,4 +95,42 @@ gulp.task('clean', function () {
   return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+//前端独立测试,读取本地json文件
+gulp.task('webserver', function() {
+  gulp.src('app').pipe(webserver({
+    livereload: true,
+    directoryListing: {
+      enable: true,
+      path: 'app'
+    },
+    host: '127.0.0.1',
+    port: 8000,
+    middleware: function(req, res, next) {
+      console.log('-----------server-----',req.url);
+      var urlObj = url.parse(req.url, true),
+        method = req.method;
+      switch (urlObj.pathname) {
+        case '/api/orders':
+          var data = {
+            "status": 0,
+            "errmsg": "",
+            "data": [{}]
+          };
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify(data));
+          return;
+        case '/api/goods':
+          // ...
+          return;
+        case '/api/images':
+          // ...
+          return;
+        default:
+          ;
+      }
+      next();
+    }
+  }));
+});
+
+gulp.task('build', ['html', 'fonts', 'other','webserver']);

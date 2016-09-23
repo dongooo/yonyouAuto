@@ -22,7 +22,8 @@
       'mgcrea.ngStrap',
       'toastr',
       'ngWebSocket',
-      'angular-jwt'
+      'angular-jwt',
+      'yyauto.cityGroup'
     ])
 
     .constant('malarkey', malarkey)

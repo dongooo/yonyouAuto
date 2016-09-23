@@ -30,7 +30,7 @@
         }
       ],
       "jQuery": {
-        "key": "jqLite"
+        "key": "jquery3"
       },
       "resource": {
         "key": "restangular",
